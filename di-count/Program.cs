@@ -52,24 +52,24 @@ namespace di_count
 
         public void Work(int number)
         {
-            Console.WriteLine($"Doing the thing {number}");
+            Console.WriteLine($"Printing {number}");
         }
     }
 
     public class BarService : IBarService
     {
-        private readonly IFooService _fooService;
+        private readonly IFooService fooService;
         public BarService(IFooService fooService)
         {
-            _fooService = fooService;
             Console.WriteLine($"Instance of {nameof(BarService)}");
+            this.fooService = fooService ?? throw new ArgumentNullException(nameof(FooService));
         }
 
         public void Work()
         {
             for (int i = 0; i < 10; i++)
             {
-                _fooService.Work(i);
+                fooService.Work(i);
             }
         }
     }
