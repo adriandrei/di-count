@@ -19,13 +19,13 @@ namespace di_count
 
             var count = 10;
             int i = 0;
-            Console.WriteLine($"Should print ctor message for each injection");
+            Console.WriteLine($"Should print ctor message for each dependency, every time we fetch an instance");
             while (i++ < count)
                 transientServiceProvider.GetService<IBarService>();
 
 
             i = 0;
-            Console.WriteLine($"Should print ctor message just once");
+            Console.WriteLine($"Should print ctor message for each dependency, just once");
             while (i++ < count)
                 singletonServiceProvider.GetService<IBarService>();
 
@@ -47,7 +47,7 @@ namespace di_count
     {
         public FooService()
         {
-            Console.WriteLine($"Another instance of {nameof(FooService)}");
+            Console.WriteLine($"Instance of {nameof(FooService)}");
         }
 
         public void Work(int number)
@@ -62,7 +62,7 @@ namespace di_count
         public BarService(IFooService fooService)
         {
             _fooService = fooService;
-            Console.WriteLine($"Another instance of {nameof(BarService)}");
+            Console.WriteLine($"Instance of {nameof(BarService)}");
         }
 
         public void Work()
